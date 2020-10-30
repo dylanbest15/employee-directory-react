@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import API from "../utils/API";
+import API from "./utils/API";
+import EmployeeContext from "./utils/employeeContext";
 
 function App() {
   // state variables
@@ -12,11 +13,12 @@ function App() {
     })
   }, []);
 
-
   return (
-    <div>
-      <h1>Hello</h1>
-    </div>
+    <EmployeeContext.Provider value={{ employees }}>
+      <div>
+        <h1>Hello</h1>
+      </div>
+    </EmployeeContext.Provider>
   )
 }
 
