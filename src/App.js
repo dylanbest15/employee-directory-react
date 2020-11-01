@@ -18,24 +18,22 @@ function App() {
     <EmployeeContext.Provider value={{ employees }}>
 
       <div className="jumbotron jumbotron-fluid">
-        <div className="container">
+        <div className="container text-center">
           <h1 className="display-4">Employee Directory</h1>
           <p className="lead">Click on carrots to filter by heading or use the search box to narrow your results.</p>
         </div>
       </div>
 
-      <div className="container">
-        <form className="form-inline">
-          <i className="fas fa-search" aria-hidden="true"></i>
-          <input className="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search"
-            aria-label="Search"></input>
-        </form>
+      <div className="search-container text-center">
+        <input class="form-control search-bar" type="text" placeholder="Search" aria-label="Search" />
+      </div>
 
+      <div className="container text-center">
         <table className="table table-striped">
           <thead>
             <tr>
               <th scope="col">Image</th>
-              <th scope="col">Name</th>
+              <th scope="col">Name <i class="fas fa-sort"></i></th>
               <th scope="col">Phone</th>
               <th scope="col">Email</th>
               <th scope="col">DOB</th>
@@ -48,7 +46,7 @@ function App() {
                 name={employee.name.first + " " + employee.name.last}
                 phone={employee.phone}
                 email={employee.email}
-                dob={employee.dob.date.slice(5, 10) + "-" + employee.dob.date.slice(0,4)}
+                dob={employee.dob.date.slice(5, 10) + "-" + employee.dob.date.slice(0, 4)}
               />
             ))}
           </tbody>

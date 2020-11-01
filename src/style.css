@@ -1,0 +1,24 @@
+div.jumbotron {
+  background-color: navy;
+  border-bottom: 5px solid red;
+  color: white;
+  padding: 32px;
+  margin: 0px;
+}
+
+div.jumbotron h1 {
+  font-weight: bold;
+}
+
+div.search-container {
+  width: 100%;
+  background-color: lightgray;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+input.search-bar {
+  width: 300px;
+  display: block;
+  margin: auto;
+}
