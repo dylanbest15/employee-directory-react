@@ -31,7 +31,7 @@ function App() {
             aria-label="Search"></input>
         </form>
 
-        <table className="table">
+        <table className="table table-striped">
           <thead>
             <tr>
               <th scope="col">Image</th>
@@ -45,10 +45,10 @@ function App() {
             {employees.map(employee => (
               <EmployeeRow
                 image={employee.picture.medium}
-                name={employee.name.first + employee.name.last}
+                name={employee.name.first + " " + employee.name.last}
                 phone={employee.phone}
                 email={employee.email}
-                dob={employee.dob.date}
+                dob={employee.dob.date.slice(5, 10) + "-" + employee.dob.date.slice(0,4)}
               />
             ))}
           </tbody>
