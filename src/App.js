@@ -47,10 +47,12 @@ function App() {
     return value;
   }
 
+  // search bar input change
   function handleInputChange() {
     setSearch(inputRef.current.value);
   }
 
+  // search bar filter helper function
   function handleSearch(employee) {
     return employee.name.first.includes(search)
   }
@@ -76,13 +78,13 @@ function App() {
             <tr>
               <th scope="col">Image</th>
               <th scope="col"
-                onClick={() => setSortBy("last")}>Name <i class="fas fa-sort"></i></th>
+                onClick={() => setSortBy("last")}>Name <button className="btn"><i class="fas fa-sort"></i></button></th>
               <th scope="col"
-                onClick={() => setSortBy("phone")}>Phone</th>
+                onClick={() => setSortBy("phone")}>Phone <button className="btn"><i class="fas fa-sort"></i></button></th>
               <th scope="col"
-                onClick={() => setSortBy("email")}>Email</th>
+                onClick={() => setSortBy("email")}>Email <button className="btn"><i class="fas fa-sort"></i></button></th>
               <th scope="col"
-                onClick={() => setSortBy("date")}>DOB</th>
+                onClick={() => setSortBy("date")}>DOB <button className="btn"><i class="fas fa-sort"></i></button></th>
             </tr>
           </thead>
           <tbody>

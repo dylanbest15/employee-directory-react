@@ -22,3 +22,7 @@ input.search-bar {
   display: block;
   margin: auto;
 }
+
+th button:hover {
+  transform: scale(2);
+}
