@@ -10,6 +10,7 @@ This app utilizes react to create a dynamic front-end. It uses Axios NPM to read
 ![employee-directory-react](screenshot-hw14.png)
 
 ## Live Link
+https://dylanbest15.github.io/employee-directory-react/
 
 ## License
 Copyright ©2020 Dylan Best
