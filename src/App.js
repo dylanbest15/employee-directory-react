@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
 import API from "./utils/API";
-import EmployeeContext from "./utils/employeeContext";
 import EmployeeRow from "./components/EmployeeRow";
 
 function App() {
@@ -54,12 +53,18 @@ function App() {
 
   // search bar filter helper function
   function handleSearch(employee) {
-    return employee.name.first.includes(search)
+    if (employee.name.first.toLowerCase().includes(search.toLowerCase()) ||
+      employee.name.last.toLowerCase().includes(search.toLowerCase()) ||
+      employee.phone.includes(search) ||
+      employee.email.toLowerCase().includes(search.toLowerCase()) ||
+      employee.dob.date.includes(search)) {
+      return true;
+    }
+    return false;
   }
 
   return (
-    <EmployeeContext.Provider value={{ employees }}>
-
+    <>
       <div className="jumbotron jumbotron-fluid">
         <div className="container text-center">
           <h1 className="display-4">Employee Directory</h1>
@@ -68,15 +73,15 @@ function App() {
       </div>
 
       <div className="search-container text-center">
-        <input className="form-control search-bar" type="text" placeholder="Search" aria-label="Search" 
-        ref={inputRef} onChange={handleInputChange}/>
+        <input className="form-control search-bar" type="text" placeholder="Search" aria-label="Search"
+          ref={inputRef} onChange={handleInputChange} />
       </div>
 
       <div className="container text-center">
         <table className="table table-striped">
           <thead>
             <tr>
-              <th scope="col">Image</th>
+              <th scope="col"></th>
               <th scope="col"
                 onClick={() => setSortBy("last")}>Name <button className="btn"><i class="fas fa-sort"></i></button></th>
               <th scope="col"
@@ -100,7 +105,7 @@ function App() {
           </tbody>
         </table>
       </div>
-    </EmployeeContext.Provider>
+    </>
   )
 }
 

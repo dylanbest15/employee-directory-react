@@ -1,9 +1,6 @@
 import React, { useContext } from "react";
-// import EmployeeContext from "../utils/employeeContext";
 
 function EmployeeRow(props) {
-  // const { employees } = useContext(EmployeeContext);
-
   return (
     <tr>
       <td>
