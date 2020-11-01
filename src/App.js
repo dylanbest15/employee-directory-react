@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import API from "./utils/API";
 import EmployeeContext from "./utils/employeeContext";
 import EmployeeRow from "./components/EmployeeRow";
 
 function App() {
+  const inputRef = useRef();
   // state variables
   const [employees, setEmployees] = useState([]);
+  const [sortBy, setSortBy] = useState("");
+  const [search, setSearch] = useState("");
 
   // use effect for api call
   useEffect(() => {
@@ -13,6 +16,44 @@ function App() {
       setEmployees(employees.results);
     })
   }, []);
+
+  // sort table
+  function sortTable() {
+    if (sortBy) {
+      return employees.sort(function (a, b) {
+        var textA = findVal(a, sortBy);
+        var textB = findVal(b, sortBy);
+        return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+      });
+    }
+    return employees
+  }
+
+  // sorter helper function found here:
+  // https://stackoverflow.com/questions/40603913/search-recursively-for-value-in-object-by-property-name
+
+  function findVal(object, key) {
+    var value;
+    Object.keys(object).some(function (k) {
+      if (k === key) {
+        value = object[k];
+        return true;
+      }
+      if (object[k] && typeof object[k] === 'object') {
+        value = findVal(object[k], key);
+        return value !== undefined;
+      }
+    });
+    return value;
+  }
+
+  function handleInputChange() {
+    setSearch(inputRef.current.value);
+  }
+
+  function handleSearch(employee) {
+    return employee.name.first.includes(search)
+  }
 
   return (
     <EmployeeContext.Provider value={{ employees }}>
@@ -25,7 +66,8 @@ function App() {
       </div>
 
       <div className="search-container text-center">
-        <input class="form-control search-bar" type="text" placeholder="Search" aria-label="Search" />
+        <input className="form-control search-bar" type="text" placeholder="Search" aria-label="Search" 
+        ref={inputRef} onChange={handleInputChange}/>
       </div>
 
       <div className="container text-center">
@@ -33,14 +75,18 @@ function App() {
           <thead>
             <tr>
               <th scope="col">Image</th>
-              <th scope="col">Name <i class="fas fa-sort"></i></th>
-              <th scope="col">Phone</th>
-              <th scope="col">Email</th>
-              <th scope="col">DOB</th>
+              <th scope="col"
+                onClick={() => setSortBy("last")}>Name <i class="fas fa-sort"></i></th>
+              <th scope="col"
+                onClick={() => setSortBy("phone")}>Phone</th>
+              <th scope="col"
+                onClick={() => setSortBy("email")}>Email</th>
+              <th scope="col"
+                onClick={() => setSortBy("date")}>DOB</th>
             </tr>
           </thead>
           <tbody>
-            {employees.map(employee => (
+            {sortTable().filter(handleSearch).map(employee => (
               <EmployeeRow
                 image={employee.picture.medium}
                 name={employee.name.first + " " + employee.name.last}
