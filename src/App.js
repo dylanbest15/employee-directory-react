@@ -44,7 +44,7 @@ function App() {
           <tbody>
             {employees.map(employee => (
               <EmployeeRow
-                image={employee.picture.thumbnail}
+                image={employee.picture.medium}
                 name={employee.name.first + employee.name.last}
                 phone={employee.phone}
                 email={employee.email}

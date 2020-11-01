@@ -6,7 +6,11 @@ function EmployeeRow(props) {
 
   return (
     <tr>
-      <td>{props.image}</td>
+      <td>
+        <div className="img-container">
+          <img alt={props.name} src={props.image} />
+        </div>
+      </td>
       <td>{props.name}</td>
       <td>{props.phone}</td>
       <td>{props.email}</td>
